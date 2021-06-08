@@ -4,7 +4,7 @@ const config = require('./config.json');
 let client = new Discord.Client();
 client.login(config.BOT_TOKEN);
 
-const PREFIX = '-pause'
+const PREFIX = '-zxc'
 
 function getText(number) {
     return 'game is pausing in ' + number;
