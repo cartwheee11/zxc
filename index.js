@@ -13,19 +13,28 @@ function getText(number) {
 client.on("message", message => {
     if(!message.content.startsWith(PREFIX)) return;
 	if(message.author.bot) return;
-    let count = 3;
-    for(let i = 3; i > 0; i--) {
-        setTimeout(function() {
-            message.channel.send(getText(count - i + 1));
-        }, i * 1000);
-       
-    }
 
-    setTimeout(function() {
-        message.channel.send('game is paused')
-    }, 4000);
-    setTimeout(function() {
-        message.channel.send('?')
-    }, 4500)
+    let count = 3;
+
+    let zxcMessage = getText(count);
+    message.channel.send(zxcMessage).then(message => {
+
+        (async function rec() {
+
+            if( count > 1) {
+                setTimeout(function () {
+                    message.edit(zxcMessage += ('\n' + getText(--count)));
+                    rec();
+                }, 1000);
+            } else {
+                setTimeout(function () {
+                    message.edit(zxcMessage + '\n?');
+                }, 500);
+            }
+            
+            
+        })();
+        
+    });
 
 })
